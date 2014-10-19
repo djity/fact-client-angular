@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Fact Client test pages</title>
+</head>
+<body ng-app="testApp" ng-controller="testAppCtrl">
+	<h1>Fact Client test pages</h1>
+
+	<ul>
+		<li><a ui-sref="fact-stream-switcher">Fact Stream Switcher</a></li>
+	</ul>
+
+	<div ui-view></div>
+
+	<!-- Angular and other deps -->
+	<script src="/bower_components/angular/angular.js"></script>
+	<script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+	<script src="/bower_components/angular-resource/angular-resource.js"></script>
+
+	<!-- inject:js -->
+  	<script src="/test/app/app.js"></script>
+  	<script src="/src/fact-client-services.js"></script>
+  	<script src="/src/services/fact-dataset.js"></script>
+  	<script src="/src/services/fact-feed.js"></script>
+  	<script src="/src/services/fact-resource.js"></script>
+  	<script src="/src/services/fact-room.js"></script>
+  	<script src="/src/services/fact-stream.js"></script>
+  	<script src="/src/fact-client-templates.js"></script>
+  	<script src="/build/directives/fact-stream-switcher/fact-stream-switcher.html.js"></script>
+  	<script src="/src/directives/fact-stream-switcher/fact-stream-switcher.js"></script>
+  	<!-- endinject -->
+</body>
+</html>

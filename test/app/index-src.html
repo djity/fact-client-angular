@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Fact Client test pages</title>
+</head>
+<body ng-app="testApp" ng-controller="testAppCtrl">
+	<h1>Fact Client test pages</h1>
+
+	<ul>
+		<li><a ui-sref="fact-stream-switcher">Fact Stream Switcher</a></li>
+	</ul>
+
+	<div ui-view></div>
+
+	<!-- Angular and other deps -->
+	<script src="/bower_components/angular/angular.js"></script>
+	<script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+	<script src="/bower_components/angular-resource/angular-resource.js"></script>
+
+	<!-- inject:js -->
+  	<!-- endinject -->
+</body>
+</html>
