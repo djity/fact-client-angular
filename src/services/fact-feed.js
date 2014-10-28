@@ -1,4 +1,4 @@
-angular.module('fact-client.services')
+angular.module('fact-client.services.feed', [])
   .service('FactFeed', ['config', '$resource', '$http', '$rootScope', '$q', 'Room',
     function(config, $resource, $http, $rootScope, $q, Room) {
 

@@ -1,3 +1,5 @@
+/*global require*/
+
 var gulp = require('gulp');
 var connect = require('gulp-connect');
 var open = require('gulp-open');
@@ -19,15 +21,21 @@ gulp.task('reload', function() {
 });
 
 gulp.task('watch', function() {
-	gulp.watch(['./test/**/*.html'], ['reload']);
+	gulp.watch(['./test/app/index-src.html'], ['inject-test-app']);
+	gulp.watch(['./test/**/*', '!./test/app/index-src.html'], ['reload']);
 	gulp.watch(['./src/**/*.js'], ['reload']);
+	gulp.watch(['./src/**/*.css'], ['reload']);
 	gulp.watch(['./src/**/*.html'], ['templates']);
 	gulp.watch(['./build/**/*.js'], ['reload']);
 });
 
 gulp.task('open', ['connect'], function() {
-	gulp.src("./test/app/index.html").pipe(open("", {
-		url: "http://localhost:3017/test/app"
+	gulp.src('./test/app/index.html').pipe(open('', {
+		url: 'http://localhost:3017/test/app'
+	}));
+
+	gulp.src('./demos/basic/index.html').pipe(open('', {
+		url: 'http://localhost:3017/demos/basic'
 	}));
 });
 
@@ -35,11 +43,10 @@ gulp.task('inject-test-app', ['templates'], function() {
 	var target = gulp.src('test/app/index-src.html');
 	var sources = gulp.src([
 		'test/app/app.js',
-		'src/fact-client-services.js',
-		'src/services/*.js',
-		'src/fact-client-templates.js',
+		'test/data/*.js',
+		'src/**/*.js',
 		'build/directives/**/*.html.js',
-		'src/directives/**/*.js'
+		'src/**/*.css',
 	], {
 		read: false
 	});
@@ -57,12 +64,12 @@ gulp.task('templates', function() {
 		.pipe(gulp.dest('./build/'));
 });
 
-gulp.task('dist', ['templates'], function() {
-	gulp.src(['src/fact-client-services.js', 'src/services/*.js']).pipe(concat('fact-client-services.js')).pipe(gulp.dest('./dist/'));
-	gulp.src(['src/fact-client-templates.js', 'build/directives/**/*.html.js']).pipe(concat('fact-client-templates.js')).pipe(gulp.dest('./dist/'));
-	gulp.src(['src/directives/**/*.js']).pipe(rename(function(path) {
-		path.dirname = '';
-	})).pipe(gulp.dest('./dist/'));
+gulp.task('styles', function() {
+	gulp.src(['src/**/*.css']).pipe(concat('fact-client.css')).pipe(gulp.dest('./dist/'));
+});
+
+gulp.task('dist', ['templates', 'styles'], function() {
+	gulp.src(['src/**/*.js', 'build/directives/**/*.html.js']).pipe(concat('fact-client.js')).pipe(gulp.dest('./dist/'));
 });
 
 gulp.task('default', ['connect', 'watch', 'open']);

@@ -1,0 +1,10 @@
+<!-- Alternative display of currentFact in 2 img tags. In order to trigger the ng-hide animation. -->
+<depiction ng-class="{rotate: rotate, fade: fade, slide: slide}" ng-show="iter%2 == 1">
+	<img ng-src="{{iter%2 == 1 ? baseUrl + currentFact.depiction : baseUrl + previousFact.depiction}}"/>
+</depiction>
+<depiction ng-class="{rotate: rotate, fade: fade, slide: slide}" ng-show="iter%2 == 0">
+	<img ng-src="{{iter%2 == 0 ? baseUrl + currentFact.depiction : baseUrl + previousFact.depiction}}"/>
+</depiction>
+
+<!-- Hidden image to preload in the browser cache -->
+<img ng-src="{{baseUrl + nextFact.depiction}}" ng-show="false"/>

@@ -1,4 +1,4 @@
-angular.module('fact-client.services')
+angular.module('fact-client.services.resource', [])
 	.service('FactResource', ['$resource', '$log', '$http', 'FACT_API_URL',
 		function($resource, $log, $http, FACT_API_URL) {
 

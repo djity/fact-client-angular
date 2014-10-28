@@ -3,27 +3,14 @@
 <head>
 	<title>Fact Client test pages</title>
 	<link rel="stylesheet" type="text/css" href="/bower_components/angular-material/angular-material.css">
-
-	<!-- inject:css -->
-  	<!-- endinject -->
+	<link rel="stylesheet" type="text/css" href="/bower_components/angular/angular-csp.css">
+	<link rel="stylesheet" type="text/css" href="/dist/fact-client.css">
 </head>
-<body ng-app="testApp" ng-controller="testAppCtrl">
-	<h1>Fact Client test pages</h1>
+<body ng-app="demoBasicApp" ng-controller="demoBasicCtrl">
+	
+<fact-stream-list streams="streams"></fact-stream-list>
 
-	<md-list>
-		<md-item>
-			<md-item-content>
-				<a ui-sref="fact-simple-slideshow">Fact simple slideshow</a>
-			</md-item-content>
-		</md-item>
-		<md-item>
-			<md-item-content>
-				<a ui-sref="fact-stream-list">Fact Stream list</a>
-			</md-item-content>
-		</md-item>
-	</md-list>
-
-	<div ui-view></div>
+	<pre>{{streams|json}}</pre>
 
 	<!-- Angular and other deps -->
 	<script src="/bower_components/angular/angular.js"></script>
@@ -33,8 +20,10 @@
 	<script src="/bower_components/angular-animate/angular-animate.js"></script>
 	<script src="/bower_components/angular-aria/angular-aria.js"></script>
 	<script src="/bower_components/hammerjs/hammer.js"></script>
+	<script src="/bower_components/lodash/dist/lodash.js"></script>
 
-	<!-- inject:js -->
-  	<!-- endinject -->
+	<!-- Current demo app and fact-client modules -->
+	<script src="./app.js"></script>
+	<script src="/dist/fact-client.js"></script>
 </body>
 </html>

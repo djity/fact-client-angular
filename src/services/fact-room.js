@@ -1,11 +1,11 @@
-angular.module('fact-client.services')
+angular.module('fact-client.services.room', [])
 	.service('FactRoom', ['$q', '$rootScope', '$window', '$log', 'FACT_API_WS',
 		function($q, $rootScope, $window, $log, FACT_API_WS) {
 
 			var joiningRooms = {};
 			var rooms = {};
 
-			$log.debug('primus connecting to ' + FACT_API_URL);
+			$log.debug('primus connecting to ' + FACT_API_WS);
 			var socket = new Primus(FACT_API_WS);
 
 			socket.on('data', function(response) {

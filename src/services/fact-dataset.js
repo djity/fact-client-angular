@@ -1,4 +1,4 @@
-angular.module('fact-client.services')
+angular.module('fact-client.services.dataset', [])
 	.service('FactRDFDataset', ['$resource', 'FACT_API_URL',
 		function($resource, FACT_API_URL) {
 
