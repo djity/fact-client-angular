@@ -14,18 +14,18 @@ var uglify = require('gulp-uglify');
 var rev = require('gulp-rev');
 var minifyCss = require('gulp-minify-css');
 var clean = require('gulp-clean');
-var exec = require('child_process').exec,
+var exec = require('child_process').exec;
 
-	/*****************************************************
-	 * Clean build directory (contains all generated files)
-	 ******************************************************/
+/*****************************************************
+ * Clean build directory (contains all generated files)
+ ******************************************************/
 
-	gulp.task('clean', function() {
-		return gulp.src('build', {
-				read: false
-			})
-			.pipe(clean());
-	});
+gulp.task('clean', function() {
+	return gulp.src('build', {
+			read: false
+		})
+		.pipe(clean());
+});
 
 /*************************************
  * Development server and webapps build
@@ -135,7 +135,7 @@ gulp.task('deploy-gh-pages', ['usemin-demos'], function() {
 
 // Deploy to the bower dedicated repository. Only done by travis-ci when the repo is tagged
 gulp.task('deploy-bower', ['dist'], function() {
-	if(!process.env.TRAVIS_TAG) {
+	if (!process.env.TRAVIS_TAG) {
 		return console.log('No tag detected. Do not deploy to bower.');
 	}
 
