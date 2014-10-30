@@ -1,8 +1,8 @@
 var app = angular.module('demoBasicApp', [
 	'ngMaterial',
 	'fact-client.services',
-	'fact-client.templates',
-	'fact-client.directives'
+	'fact-client.directives',
+	'fact-client.templates'
 ]);
 
 app.constant('FACT_API_URL', 'http://fact-office.djity.net/fact-api/');

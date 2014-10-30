@@ -1,4 +1,5 @@
 /*global require*/
+/*jshint node:true*/
 
 var gulp = require('gulp');
 var connect = require('gulp-connect');
@@ -7,6 +8,27 @@ var angularTemplates = require('gulp-angular-templates');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var inject = require('gulp-inject');
+var deploy = require('gulp-gh-pages');
+var usemin = require('gulp-usemin');
+var uglify = require('gulp-uglify');
+var rev = require('gulp-rev');
+var minifyCss = require('gulp-minify-css');
+var clean = require('gulp-clean');
+
+/*****************************************************
+* Clean build directory (contains all generated files)
+******************************************************/
+
+gulp.task('clean', function () {
+    return gulp.src('build', {read: false})
+        .pipe(clean());
+});
+
+/*************************************
+ * Development server and webapps build
+ **************************************/
+
+gulp.task('default', ['connect', 'watch', 'open']);
 
 gulp.task('connect', ['templates', 'inject-test-app'], function() {
 	connect.server({
@@ -45,7 +67,7 @@ gulp.task('inject-test-app', ['templates'], function() {
 		'test/app/app.js',
 		'test/data/*.js',
 		'src/**/*.js',
-		'build/directives/**/*.html.js',
+		'build/templates/**/*.html.js',
 		'src/**/*.css',
 	], {
 		read: false
@@ -61,15 +83,41 @@ gulp.task('templates', function() {
 		.pipe(angularTemplates({
 			module: 'fact-client.templates'
 		}))
-		.pipe(gulp.dest('./build/'));
+		.pipe(gulp.dest('./build/templates'));
 });
 
-gulp.task('styles', function() {
-	gulp.src(['src/**/*.css']).pipe(concat('fact-client.css')).pipe(gulp.dest('./dist/'));
+/*****************************************
+ * Prepare dist folder for bower publishing
+ ******************************************/
+
+gulp.task('dist', ['dist-styles', 'dist-sources']);
+
+gulp.task('dist-styles', function() {
+	return gulp.src(['src/**/*.css']).pipe(concat('fact-client.css')).pipe(gulp.dest('./build/dist/'));
 });
 
-gulp.task('dist', ['templates', 'styles'], function() {
-	gulp.src(['src/**/*.js', 'build/directives/**/*.html.js']).pipe(concat('fact-client.js')).pipe(gulp.dest('./dist/'));
+gulp.task('dist-sources', ['templates'], function() {
+	return gulp.src(['src/**/*.js', 'build/templates/**/*.html.js']).pipe(concat('fact-client.js')).pipe(gulp.dest('./build/dist/'));
 });
 
-gulp.task('default', ['connect', 'watch', 'open']);
+/*********************************************
+ * deploy to gh-pages and bower dedicated repo
+ *********************************************/
+
+gulp.task('usemin-demos', ['dist'], function() {
+  gulp.src('./demos/**/*.html')
+    .pipe(usemin({
+      css: [minifyCss(), rev()],
+      js: [uglify(), rev()]
+    }))
+    .pipe(gulp.dest('build/demos'));
+});
+
+gulp.task('deploy-gh-pages', ['usemin-demos'], function() {
+	var deployOptions = {};
+	if(process.env.githubToken) {
+		deployOptions.remoteUrl = 'https://' + process.env.githubToken + '@github.com/djity/fact-client-angular';
+	}
+	return gulp.src('./build/demos/**/*')
+		.pipe(deploy(deployOptions));
+});
