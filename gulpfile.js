@@ -14,15 +14,18 @@ var uglify = require('gulp-uglify');
 var rev = require('gulp-rev');
 var minifyCss = require('gulp-minify-css');
 var clean = require('gulp-clean');
+var exec = require('child_process').exec,
 
-/*****************************************************
-* Clean build directory (contains all generated files)
-******************************************************/
+	/*****************************************************
+	 * Clean build directory (contains all generated files)
+	 ******************************************************/
 
-gulp.task('clean', function () {
-    return gulp.src('build', {read: false})
-        .pipe(clean());
-});
+	gulp.task('clean', function() {
+		return gulp.src('build', {
+				read: false
+			})
+			.pipe(clean());
+	});
 
 /*************************************
  * Development server and webapps build
@@ -106,24 +109,51 @@ gulp.task('dist-sources', ['templates'], function() {
 
 // Build the demos before pushing to gh-pages
 gulp.task('usemin-demos', ['dist'], function() {
-  gulp.src('./demos/**/*.html')
-    .pipe(usemin({
-      css: [minifyCss(), rev()],
-      js: [uglify(), rev()]
-    }))
-    .pipe(gulp.dest('build/demos'));
+	gulp.src('./demos/**/*.html')
+		.pipe(usemin({
+			css: [minifyCss(), rev()],
+			js: [uglify(), rev()]
+		}))
+		.pipe(gulp.dest('build/demos'));
 });
 
+// Deploy demos applications, can be be called manually or by travis-ci by including '[deploy demos]' in a commit message
 gulp.task('deploy-gh-pages', ['usemin-demos'], function() {
-	if(process.env.TRAVIS_COMMIT_MSG && process.env.TRAVIS_COMMIT_MSG.indexOf('[deploy demos]') === -1) {
+	if (process.env.TRAVIS_COMMIT_MSG && process.env.TRAVIS_COMMIT_MSG.indexOf('[deploy demos]') === -1) {
 		return console.log('No [deploy demos] string found in commit message. Do not deploy to gh-pages.');
 	}
-
-	var deployOptions = {};
-	if(process.env.githubToken) {
+	var deployOptions = {
+		cacheDir: './build/repos/fact-client-angular'
+	};
+	if (process.env.githubToken) {
 		console.log('"githubToken" environment variable found, use it to authenticate to github');
 		deployOptions.remoteUrl = 'https://' + process.env.githubToken + '@github.com/djity/fact-client-angular';
 	}
 	return gulp.src('./build/demos/**/*')
 		.pipe(deploy(deployOptions));
+});
+
+// Deploy to the bower dedicated repository. Only done by travis-ci when the repo is tagged
+gulp.task('deploy-bower', ['dist'], function() {
+	if(!process.env.TRAVIS_TAG) {
+		return console.log('No tag detected. Do not deploy to bower.');
+	}
+
+	var deployOptions = {
+		branch: 'master',
+		cacheDir: './build/repos/fact-client-angular-bower'
+	};
+
+	if (process.env.githubToken) {
+		console.log('"githubToken" environment variable found, use it to authenticate to github');
+		deployOptions.remoteUrl = 'https://' + process.env.githubToken + '@github.com/djity/fact-client-angular-bower';
+	} else {
+		deployOptions.remoteUrl = 'https://github.com/djity/fact-client-angular-bower';
+	}
+	return gulp.src('./build/dist/**/*')
+		.pipe(deploy(deployOptions))
+		.on('end', function() {
+			console.log('tag the bower repository');
+			exec('cd ./build/repos/fact-client-angular-bower && git tag -a -m "' + process.env.TRAVIS_TAG + '" ' + process.env.TRAVIS_TAG);
+		});
 });
