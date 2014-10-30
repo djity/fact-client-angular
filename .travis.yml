@@ -13,6 +13,7 @@ env:
 before_install:
   - npm install -g bower gulp
   - npm install
+  - "export TRAVIS_COMMIT_MSG=\"$(git log --format=%B --no-merges -n 1)\"" # fetch current commit message using git log, kinda hackish, see github.com/travis-ci/travis-ci/issues/965
 
 # install module dependency
 install: 

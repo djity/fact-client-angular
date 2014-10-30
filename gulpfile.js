@@ -104,6 +104,7 @@ gulp.task('dist-sources', ['templates'], function() {
  * deploy to gh-pages and bower dedicated repo
  *********************************************/
 
+// Build the demos before pushing to gh-pages
 gulp.task('usemin-demos', ['dist'], function() {
   gulp.src('./demos/**/*.html')
     .pipe(usemin({
@@ -114,8 +115,13 @@ gulp.task('usemin-demos', ['dist'], function() {
 });
 
 gulp.task('deploy-gh-pages', ['usemin-demos'], function() {
+	if(process.env.TRAVIS_COMMIT_MSG && process.env.TRAVIS_COMMIT_MSG.indexOf('[deploy demos]') === -1) {
+		return console.log('No [deploy demos] string found in commit message. Do not deploy to gh-pages.');
+	}
+
 	var deployOptions = {};
 	if(process.env.githubToken) {
+		console.log('"githubToken" environment variable found, use it to authenticate to git');
 		deployOptions.remoteUrl = 'https://' + process.env.githubToken + '@github.com/djity/fact-client-angular';
 	}
 	return gulp.src('./build/demos/**/*')
