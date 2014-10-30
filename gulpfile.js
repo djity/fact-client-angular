@@ -121,7 +121,7 @@ gulp.task('deploy-gh-pages', ['usemin-demos'], function() {
 
 	var deployOptions = {};
 	if(process.env.githubToken) {
-		console.log('"githubToken" environment variable found, use it to authenticate to git');
+		console.log('"githubToken" environment variable found, use it to authenticate to github');
 		deployOptions.remoteUrl = 'https://' + process.env.githubToken + '@github.com/djity/fact-client-angular';
 	}
 	return gulp.src('./build/demos/**/*')
