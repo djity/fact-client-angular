@@ -117,8 +117,12 @@ gulp.task('usemin-demos', ['dist'], function() {
 		.pipe(gulp.dest('build/demos'));
 });
 
+gulp.task('git-config', function(callback){
+	exec('git config --global user.email "alban.mouton@gmail.com" && git config --global user.name "Alban Mouton through Travis-CI"', callback);
+});
+
 // Deploy demos applications, can be be called manually or by travis-ci by including '[deploy demos]' in a commit message
-gulp.task('deploy-gh-pages', ['usemin-demos'], function() {
+gulp.task('deploy-gh-pages', ['usemin-demos', 'git-config'], function() {
 	if (process.env.TRAVIS_COMMIT_MSG && process.env.TRAVIS_COMMIT_MSG.indexOf('[deploy demos]') === -1) {
 		return console.log('No [deploy demos] string found in commit message. Do not deploy to gh-pages.');
 	}
@@ -134,7 +138,7 @@ gulp.task('deploy-gh-pages', ['usemin-demos'], function() {
 });
 
 // Deploy to the bower dedicated repository. Only done by travis-ci when the repo is tagged
-gulp.task('deploy-bower', ['dist'], function() {
+gulp.task('deploy-bower', ['dist', 'git-config'], function() {
 	if (!process.env.TRAVIS_TAG) {
 		return console.log('No tag detected. Do not deploy to bower.');
 	}
