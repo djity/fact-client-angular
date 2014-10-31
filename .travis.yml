@@ -25,3 +25,4 @@ script: gulp dist
 # deploy demos application to gh-pages branch
 after_success:
   - gulp deploy-gh-pages
+  - gulp deploy-bower
