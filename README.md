@@ -8,6 +8,9 @@ Fact Client Angular
 
 **Disclaimer: this is a small open source module, but it is directly related to a private API. Until this API is more mature and documented, this project is of little interest for outsiders.**
 
+Online demos:
+  - [basic, just a seed for more interesting stuff](http://djity.github.io/fact-client-angular/basic/)
+
 Install
 -------
 
