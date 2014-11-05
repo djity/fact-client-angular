@@ -38,11 +38,11 @@ Write re-usable directives and services in the module, each directive should hav
 
 Directives should use [angular-material](https://material.angularjs.org/) and generally try to follow the [material-design](http://www.google.com/design/spec/material-design/introduction.html) specifications.
 
-Directives should as much as possible be independent from the services. Meaning that it should be possible to write small offline test pages for directives. This improves testability and decoupling.
+Directives should as much as possible be independent from the services. Meaning that it should be possible to write small offline test pages for directives. This improves testability and development efficiency.
 
-Demos should be created next to 'demos/basic' and use this first demo as a seed. When doing some improvements this demo should be maintained to be the best for bootstrapping other demos.
+Demos should be created next to 'demos/basic' and use this first demo as a seed. When doing some improvements this demo should be maintained to be the best for bootstrapping others.
 
-To the demos simply include '[deploy-demos]' in a commit message:
+To the deploy demos simply include '[deploy-demos]' in a commit message. Do not try to commit manually to the gh-pages branch:
 
     git commit -m '[deploy-demos] my commit message'
     git push
