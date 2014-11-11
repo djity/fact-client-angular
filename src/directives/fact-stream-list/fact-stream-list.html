@@ -1,5 +1,5 @@
 <md-list>
-	<md-item ng-repeat="stream in streams" ng-class="{active: currentStream == stream}">
+	<md-item ng-repeat="stream in streams" ng-class="{active: currentStream._id == stream._id}">
 		<md-item-content ng-click="activeStream(stream)" ink-ripple>
 			<div class="md-tile-left">
 				<md-progress-circular ng-if="!stream.variantsLastFact['fast-low-verySmall']" mode="indeterminate"></md-progress-circular>
@@ -16,6 +16,7 @@
 				<h3>{{stream.label}}</h3>
 				<p>{{stream.description}}</p>
 			</div>
-		<md-item-content>
+		</md-item-content>
+		<md-divider ng-if="!$last"></md-divider>
 	</md-item>
 </md-list>

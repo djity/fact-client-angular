@@ -13,10 +13,17 @@ app.controller('demoBasicCtrl', ['$scope', 'FactStream',
 		$scope.streams = FactStream.query();
 		
 		$scope.$watch('streams', function(){
+			$scope.currentStream = $scope.currentStream || $scope.streams[0];
 			angular.forEach($scope.streams, function(stream){
 				stream.followVariant('fast-low-verySmall');
 			});
 		}, true);
+
+		$scope.$watch('currentStream', function(){
+			if ($scope.currentStream) {
+				$scope.currentStream.followVariant('veryFast-low-large');
+			}
+		});
 		
 	}
 ]);

@@ -9,10 +9,10 @@ fact-stream-list fact-simple-slideshow {
 }
 
 fact-stream-list fact-simple-slideshow depiction {
-	width: 50px;
-	height: 50px;
-	top: 3px;
-	left: 3px;
+	width: 46px;
+	height: 46px;
+	top: 5px;
+	left: 5px;
 	overflow: hidden;
 	background-color: transparent;
 	border-radius: 50%;

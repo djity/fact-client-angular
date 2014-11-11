@@ -11,11 +11,31 @@
 	<!-- build:css fact.css -->
 	<link rel="stylesheet" type="text/css" href="../../build/dist/fact-client.css">
 	<!-- endbuild -->
+
+	<!-- build:css app.css -->
+	<link rel="stylesheet" type="text/css" href="./app.css">
+	<!-- endbuild -->
 </head>
-<body ng-app="demoBasicApp" ng-controller="demoBasicCtrl">
-	
-	<fact-stream-list streams="streams"></fact-stream-list>
+<body ng-app="demoBasicApp" ng-controller="demoBasicCtrl" layout="vertical" layout-fill>
+	<md-toolbar>
+	    <h2 class="md-toolbar-tools">
+	       	<span>Fact-API basic demo</span>
+	    </h2>
+	</md-toolbar>
+	<section layout="horizontal" flex>
+		<md-content flex class="md-padding">
+			<!--<pre>{{currentStream.variantsLastFact['fast-low-large']|json}}</pre>-->
+			<fact-simple-slideshow fact="currentStream.variantsLastFact['veryFast-low-large']" preload-delay="3000" fade="true"></fact-simple-slideshow>
+		</md-content>
+		<md-sidenav class="md-sidenav-right md-whiteframe-z2" component-id="right" is-locked-open="true">
+			<md-content class="md-padding">
+				<fact-stream-list streams="streams" current-stream="currentStream"></fact-stream-list>
+			</md-content class="md-padding">
+		</md-sidenav>
+	</section>
+
 	<!--<pre>{{streams | json}}</pre>-->
+
 	<!-- build:js vendor.js -->
 	<script src="../../bower_components/angular/angular.js"></script>
 	<script src="../../bower_components/angular-ui-router/release/angular-ui-router.js"></script>

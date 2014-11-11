@@ -46,5 +46,5 @@ fact-simple-slideshow depiction.rotate.ng-hide-add-active,
 fact-simple-slideshow depiction.rotate.ng-hide-remove-active {
   /* the transition is defined in the active class */
   transform: rotate(360deg);
-  transform: 1s cubic-bezier(.55,0,.1,1) all;
+  transform: 10s cubic-bezier(.55,0,.1,1) all;
 }
