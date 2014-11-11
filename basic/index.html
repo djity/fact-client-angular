@@ -3,18 +3,36 @@
 <head>
 	<title>Fact Client basic demo</title>
 
-	<link rel="stylesheet" href="vendor-f3e6c6e2.css"/>
+	<link rel="stylesheet" href="vendor-ac055ba0.css"/>
 
-	<link rel="stylesheet" href="fact-31d67d81.css"/>
+	<link rel="stylesheet" href="fact-27eb5f47.css"/>
+
+	<link rel="stylesheet" href="app-0a3650df.css"/>
 </head>
-<body ng-app="demoBasicApp" ng-controller="demoBasicCtrl">
-	
-	<fact-stream-list streams="streams"></fact-stream-list>
+<body ng-app="demoBasicApp" ng-controller="demoBasicCtrl" layout="vertical" layout-fill>
+	<md-toolbar>
+	    <h2 class="md-toolbar-tools">
+	       	<span>Fact-API basic demo</span>
+	    </h2>
+	</md-toolbar>
+	<section layout="horizontal" flex>
+		<md-content flex class="md-padding">
+			<!--<pre>{{currentStream.variantsLastFact['fast-low-large']|json}}</pre>-->
+			<fact-simple-slideshow fact="currentStream.variantsLastFact['veryFast-low-large']" preload-delay="3000" fade="true"></fact-simple-slideshow>
+		</md-content>
+		<md-sidenav class="md-sidenav-right md-whiteframe-z2" component-id="right" is-locked-open="true">
+			<md-content class="md-padding">
+				<fact-stream-list streams="streams" current-stream="currentStream"></fact-stream-list>
+			</md-content class="md-padding">
+		</md-sidenav>
+	</section>
 
-	<script src="vendor-1f52ce30.js"></script>
+	<!--<pre>{{streams | json}}</pre>-->
 
-	<script src="fact-a82be999.js"></script>
+	<script src="vendor-e5109b43.js"></script>
 
-	<script src="app-2d0b1dc5.js"></script>
+	<script src="fact-15c14acf.js"></script>
+
+	<script src="app-c4f4bdcc.js"></script>
 </body>
 </html>
