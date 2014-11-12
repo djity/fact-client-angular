@@ -109,7 +109,7 @@ gulp.task('dist-sources', ['templates'], function() {
 
 // Build the demos before pushing to gh-pages
 gulp.task('usemin-demos', ['dist'], function() {
-	gulp.src('./demos/**/*.html')
+	return gulp.src('./demos/**/*.html')
 		.pipe(usemin({
 			css: [minifyCss(), rev()],
 			js: [uglify(), rev()]
