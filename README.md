@@ -45,7 +45,7 @@ Directives should as much as possible be independent from the services. Meaning 
 
 Demos should be created next to 'demos/basic' and use this first demo as a seed. When doing some improvements this demo should be maintained to be the best for bootstrapping others.
 
-To the deploy demos simply include '[deploy-demos]' in a commit message. Do not try to commit manually to the gh-pages branch:
+To the deploy demos simply include '[deploy-demos]' or '[deploy demos]' in a commit message. Do not try to commit manually to the gh-pages branch:
 
     git commit -m '[deploy-demos] my commit message'
     git push
