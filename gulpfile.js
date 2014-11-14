@@ -109,7 +109,7 @@ gulp.task('dist-sources', ['templates'], function() {
 
 // Build the demos before pushing to gh-pages
 gulp.task('usemin-demos', ['dist'], function() {
-	gulp.src('./demos/**/*.html')
+	return gulp.src('./demos/**/*.html')
 		.pipe(usemin({
 			css: [minifyCss(), rev()],
 			js: [uglify(), rev()]
@@ -123,7 +123,8 @@ gulp.task('git-config', function(callback){
 
 // Deploy demos applications, can be be called manually or by travis-ci by including '[deploy demos]' in a commit message
 gulp.task('deploy-gh-pages', ['usemin-demos', 'git-config'], function() {
-	if (process.env.TRAVIS_COMMIT_MSG && process.env.TRAVIS_COMMIT_MSG.indexOf('[deploy demos]') === -1) {
+	var ciMsg = process.env.TRAVIS_COMMIT_MSG;
+	if (ciMsg && ciMsg.indexOf('[deploy demos]') === -1 && ciMsg.indexOf('[deploy-demos]') === -1) {
 		return console.log('No [deploy demos] string found in commit message. Do not deploy to gh-pages.');
 	}
 	var deployOptions = {
