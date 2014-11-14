@@ -20,6 +20,10 @@ testApp.config(['$stateProvider',
 			.state('fact-stream-list', {
 				url: '/fact-stream-list',
 				templateUrl: 'fact-stream-list.html'
+			})
+			.state('fact-world-map', {
+				url: '/fact-world-map',
+				templateUrl: 'fact-world-map.html'
 			});
 	}
 ]);

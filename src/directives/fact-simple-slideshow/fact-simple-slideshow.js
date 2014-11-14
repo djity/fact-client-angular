@@ -2,7 +2,7 @@ angular.module('fact-client.directives.simple-slideshow', ['ngAnimate'])
 	.directive('factSimpleSlideshow', ['$timeout', '$log', 'FACT_API_URL',
 		function($timeout, $log, FACT_API_URL) {
 			return {
-				restrict: 'EA',
+				restrict: 'E',
 				templateUrl: 'directives/fact-simple-slideshow/fact-simple-slideshow.html',
 				scope: {
 					fact: '=',

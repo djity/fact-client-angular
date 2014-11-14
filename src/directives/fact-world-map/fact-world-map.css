@@ -1,0 +1,29 @@
+fact-world-map {
+	display: block;
+}
+
+fact-world-map, fact-world-map svg {
+	width: 100%;
+	height: 100%;
+}
+
+fact-world-map .globe {
+	fill: #80d8ff;
+	stroke: #0D47A1;
+}
+
+fact-world-map .land {
+	fill-opacity: 0;
+  	stroke: #795548;
+}
+
+fact-world-map .countries {
+	fill: #EFEBE9;
+  	stroke: #D7CCC8;
+}
+
+fact-world-map .mark {
+	fill-opacity: 0;
+	stroke: #212121;
+    stroke-width: 3px;
+}

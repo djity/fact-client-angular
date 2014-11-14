@@ -21,6 +21,10 @@ testData.constant('FACTS', [{
 		"url": "/test/data/verySmall_LubchencoJane-NOAA.jpg",
 		"width": 326,
 		"height": 490
+	},
+	"geo": {
+		"latitude": 47.879167,
+		"longitude": -2.398333
 	}
 }, {
 	"factType": "53c98170e9b0a9fd36f3e4ff",
@@ -43,6 +47,10 @@ testData.constant('FACTS', [{
 		"url": "/test/data/verySmall_John_S._Clarke.jpg",
 		"width": 331,
 		"height": 483
+	},
+	"geo": {
+		"latitude": 12.366000,
+		"longitude": -1.518000
 	}
 }, {
 	"factType": "53c98170e9b0a9fd36f3e4ff",
@@ -77,5 +85,9 @@ testData.constant('FACTS', [{
 		"url": "/test/data/verySmall_Ryan_Jones_Oilers_2012.jpg",
 		"width": 408,
 		"height": 391
+	},
+	"geo": {
+		"latitude": 39.906387,
+		"longitude": 116.379723
 	}
 }]);

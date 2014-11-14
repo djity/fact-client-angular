@@ -1,7 +1,7 @@
 angular.module('fact-client.directives.stream-list', [])
 	.directive('factStreamList', function(){
 		return {
-			restrict: 'EA',
+			restrict: 'E',
 			templateUrl: 'directives/fact-stream-list/fact-stream-list.html',
 			scope: {
 				streams: '=',
